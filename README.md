@@ -1,4 +1,4 @@
-# HEIC to JPEG
+# heic.sanford.io - HEIC to JPEG
 
 A static PWA that converts HEIC images to JPEG entirely in the browser using [heic2any](https://github.com/nicolo-ribaudo/heic2any) (libheif WASM). No server-side processing, no build step.
 
