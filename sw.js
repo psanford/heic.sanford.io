@@ -1,35 +1,10 @@
-var CACHE_NAME = 'heic2jpeg-v1';
 var MEDIA_CACHE = 'heic2jpeg-media';
 
-var PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json',
-  '/icon-192.png',
-  '/icon-512.png',
-  'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.js'
-];
-
-self.addEventListener('install', function (event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(PRECACHE_URLS);
-    })
-  );
+self.addEventListener('install', function () {
   self.skipWaiting();
 });
 
-self.addEventListener('activate', function (event) {
-  event.waitUntil(
-    caches.keys().then(function (keys) {
-      return Promise.all(
-        keys.filter(function (k) { return k !== CACHE_NAME && k !== MEDIA_CACHE; })
-          .map(function (k) { return caches.delete(k); })
-      );
-    })
-  );
+self.addEventListener('activate', function () {
   self.clients.claim();
 });
 
@@ -38,14 +13,7 @@ self.addEventListener('fetch', function (event) {
 
   if (url.pathname === '/share-target' && event.request.method === 'POST') {
     event.respondWith(handleShareTarget(event.request));
-    return;
   }
-
-  event.respondWith(
-    caches.match(event.request).then(function (cached) {
-      return cached || fetch(event.request);
-    })
-  );
 });
 
 function handleShareTarget(request) {

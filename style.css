@@ -64,7 +64,7 @@ h1 {
 }
 
 #status {
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   font-size: 0.95rem;
   color: #aaa;
   text-align: center;
@@ -73,6 +73,17 @@ h1 {
 
 #status.error {
   color: #f07070;
+}
+
+.drop-zone.converting {
+  cursor: default;
+}
+
+.drop-zone.converting p {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
 }
 
 #result {
@@ -104,18 +115,3 @@ h1 {
   background: #25a99d;
 }
 
-.spinner {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border: 3px solid #444;
-  border-top-color: #4cc9f0;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  vertical-align: middle;
-  margin-right: 0.5rem;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
